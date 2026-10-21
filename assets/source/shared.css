@@ -1,0 +1,47 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #888; }
+.sheet { width: max-content; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.item { zoom: 2; position: relative; overflow: hidden; width: 1200px; background: var(--paper); color: var(--ink); font-family: "Chakra Petch", sans-serif; }
+.item svg { position: absolute; inset: 0; }
+.mono { font-family: "JetBrains Mono", monospace; }
+
+:root {
+  --paper:#eceee9; --ink:#17202b; --muted:#4a5562; --cardline:#c5cbd0; --lead:#7b8794;
+  --steel-t:#dfe4e9; --steel-l:#aeb8c3; --steel-r:#8f9bab;
+  --press-t:#5d6b7c; --press-l:#3f4a58; --press-r:#2f3843; --plate:#f2b705;
+  --yellow-t:#ffd23f; --yellow-l:#e8a90b; --yellow-r:#c98d00;
+  --gate-t:#3fbf7f; --gate-l:#24935c; --gate-r:#1a7448; --badge-ink:#ffffff;
+  --card-t:#ffffff; --card-l:#d4dae0; --card-r:#bcc5ce; --card-line:#9aa6b2;
+  --crate-t:#e2b77c; --crate-l:#c4935a; --crate-r:#a57843; --tape:#f3dcb5;
+  --repo-t:#e2b77c; --repo-l:#c4935a; --repo-r:#a57843; --label:#ffffff; --label-ink:#17202b;
+  --pallet-t:#8d6a45; --pallet-l:#6e5134; --pallet-r:#5a4129;
+  --belt:#2a323c; --belt-line:#3c4652; --hole:#3a2f12; --shadow:rgba(23,32,43,.10);
+  --slab-t:#f7f8f5; --slab-l:#d3d8d2; --slab-r:#bcc3bb; --grid:#e3e6e0; --stripe:#f2b705;
+  --wall-l:#dde2e6; --wall-r:#c8cfd6; --window:#b9d4ea;
+  --sign:#17202b; --sign-ink:#ffffff; --sign-ok:#1a7448; --sign-opt:#8a5a00;
+  --ghost-t:#fff4cc; --ghost-l:#ffe9a3; --ghost-r:#ffdf80;
+}
+html[data-theme="dark"] {
+  --paper:#11161c; --ink:#e9eef3; --muted:#a2adb9; --cardline:#29323c; --lead:#6b7886;
+  --steel-t:#56626f; --steel-l:#3a444f; --steel-r:#2c343d;
+  --press-t:#4d5b6b; --press-l:#36414e; --press-r:#56636f; --plate:#ffc933;
+  --yellow-t:#ffcf33; --yellow-l:#d99a00; --yellow-r:#b07d00;
+  --gate-t:#4fd18f; --gate-l:#2aa266; --gate-r:#1d7d4e; --badge-ink:#0d1a12;
+  --card-t:#e8edf2; --card-l:#b5bfc9; --card-r:#98a4b0; --card-line:#7a8794;
+  --crate-t:#c99a5e; --crate-l:#a47643; --crate-r:#855d33; --tape:#e2c393;
+  --repo-t:#c99a5e; --repo-l:#a47643; --repo-r:#855d33; --label:#f4f1ea; --label-ink:#11161c;
+  --pallet-t:#6e5134; --pallet-l:#553e27; --pallet-r:#45321f;
+  --belt:#0a0e12; --belt-line:#1c232b; --hole:#1c1606; --shadow:rgba(0,0,0,.35);
+  --slab-t:#1b232c; --slab-l:#141a21; --slab-r:#0f141a; --grid:#232c36; --stripe:#d9a400;
+  --wall-l:#18202a; --wall-r:#141b23; --window:#3d5d78;
+  --sign:#e9eef3; --sign-ink:#11161c; --sign-ok:#4fd18f; --sign-opt:#ffcf33;
+  --ghost-t:#3d3418; --ghost-l:#2e2712; --ghost-r:#241e0d;
+}
+rect.sign { fill: var(--sign); } .sign-t { fill: var(--sign-ink); }
+rect.ok { fill: var(--sign-ok); } rect.opt { fill: var(--sign-opt); } .ok-t, .opt-t { fill: var(--sign-ink); }
+.title { position: absolute; left: 56px; top: 64px; width: 470px; }
+.kicker { font-family: "JetBrains Mono"; font-size: 17px; letter-spacing: 3px; color: var(--muted); }
+.name { font-size: 76px; font-weight: 700; line-height: 1; margin-top: 10px; letter-spacing: -1px; }
+.tag { font-size: 27px; font-weight: 500; color: var(--muted); margin-top: 16px; line-height: 1.3; }
+.item text, .item div { font-variant-ligatures: none; font-feature-settings: "calt" 0; }
+circle.numc { fill: var(--sign); }

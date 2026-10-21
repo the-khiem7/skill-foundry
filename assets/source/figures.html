@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>figures</title>
+<!-- Source of ../workflow.webp, ../contents.webp, ../update.webp and their -dark pairs. Render from the repository root with:
+     uvx --from playwright --with pillow python -I <frontdoor-illustrate>/scripts/render.py assets/source/figures.html --root assets --out assets
+     Signature note: same six lines as hero.html - isometric factory floor, Chakra Petch and JetBrains Mono, steel with safety yellow, pass green and cardboard, one scene per figure, no gradients or stock icons. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=JetBrains+Mono:wght@500;700&display=block">
+<script src="shared.js"></script>
+<script src="iso.js"></script>
+<script src="figures.js"></script>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="sheet">
+<div class="item" id="workflow" style="height:570px"><svg viewBox="0 0 1200 570" width="1200" height="570"></svg></div>
+<div class="item" id="contents" style="height:600px"><svg viewBox="0 0 1200 600" width="1200" height="600"></svg></div>
+<div class="item" id="update" style="height:580px"><svg viewBox="0 0 1200 580" width="1200" height="580"></svg></div>
+</div>
+<script>
+drawWorkflow(document.querySelector("#workflow svg"));
+drawContents(document.querySelector("#contents svg"));
+drawUpdate(document.querySelector("#update svg"));
+</script>
+</body>
+</html>

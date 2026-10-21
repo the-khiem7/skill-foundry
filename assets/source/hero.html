@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>hero</title>
+<!-- Source of ../hero.webp and ../hero-dark.webp. Render from the repository root with:
+     uvx --from playwright --with pillow python -I <frontdoor-illustrate>/scripts/render.py assets/source/hero.html --root assets --out assets
+     Each .item is 1200 CSS px wide, so 2400 px in the image.
+     Signature note:
+       concept: a factory hall where copier is a production line; five answers go in, a tested skill repository rolls off on a pallet
+       shape language: flat isometric blocks from iso.js, three tones per material, no outlines, soft floor shadows, dotted leader lines to chip signs
+       typeface: Chakra Petch for display, JetBrains Mono for signs and labels
+       palette logic: steel greys carry the plant, safety yellow marks input, pass green marks tests, cardboard marks the product; dark mode is the same hall at night
+       presentation: one scene per figure on the same factory floor, stations named with the exact command or file, few words
+       what it is not: no gradients, no blue-purple SaaS glow, no stock icons, no rounded card stacks -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=JetBrains+Mono:wght@500;700&display=block">
+<script src="shared.js"></script>
+<script src="iso.js"></script>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="sheet">
+<div class="item" id="hero" style="height:600px"><svg viewBox="0 0 1200 600" width="1200" height="600"></svg>
+  <div class="title" style="top:auto;bottom:44px"><div class="kicker">COPIER TEMPLATE</div><div class="name">skill-foundry</div><div class="tag">Five answers in.<br>A tested skill repo off the line.</div></div></div>
+</div>
+<script>
+drawLine(document.querySelector("#hero svg"), { s: 30, ox: 600, oy: 245, slab: true, wall: true });
+</script>
+</body>
+</html>
