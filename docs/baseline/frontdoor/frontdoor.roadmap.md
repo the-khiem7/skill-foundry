@@ -15,7 +15,8 @@ code_ref: "uncommitted"
 | FR-P2 | body figures | FR-P1 | complete |
 | FR-P3 | README text | FR-P2 | complete |
 | FR-P4 | polish and hosted review | FR-P3 | active |
-| FR-P5 | commit | FR-P4 | planned, needs explicit authorization |
+| FR-P5 | commit | FR-P4 | complete |
+| FR-P6 | landing page | FR-P1 | active |
 
 ## FR-P1: signature and hero
 
@@ -68,6 +69,20 @@ Acceptance criteria:
 
 Verification gate: `git status` clean except `.frontdoor/`.
 
+Evidence: commits `84189ac`, `a222b35`, `535ae70`; nothing pushed.
+
+## FR-P6: landing page
+
+Acceptance criteria:
+
+- root `index.html` per FR-D9, chosen on the local board (rounds 4 and 5)
+- `assets/og.png` 1200x630 and `assets/favicon.svg`
+- every control that drives a figure changes the screen with and without reduced motion
+
+Verification gate: `shoot.py check` at 390, 820, 1280 px, light and dark, with axe and `--click`; `lighthouse.py` mobile and desktop; foundry suite and ruff.
+
+Evidence: `shoot.py` 0 FAIL, 0 WARN with axe and the run controls at 360, 390, 820 and 1280 px after the phone layout; Lighthouse 100 on all four scores, mobile and desktop, one localhost run each, before the phone layout; suite 22 passed, ruff clean. Not observed: Pages URL, share card, external links, the end state of each phone figure after a run on a real device.
+
 ## Risks
 
 - `gh:the-khiem7/skill-foundry` and the `v1.0.0` guide link resolve only after a pushed tag; the README promises both.
@@ -75,4 +90,4 @@ Verification gate: `git status` clean except `.frontdoor/`.
 
 ## Next action
 
-Wait for explicit authorization of FR-P5. The github.com review of FR-P4 needs a pushed commit, so it runs after FR-P5 and after the user pushes; until then FR-P4 stays active.
+User reviews `index.html` locally and authorizes a commit of FR-P6. After a push, the user enables Pages (Deploy from a branch, `main`, `/ (root)`); then the github.com review of FR-P4 and a check of the Pages URL and share card run together.

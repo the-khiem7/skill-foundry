@@ -21,6 +21,7 @@ code_ref: "uncommitted"
 | FR-D6 | lesson: mono ligatures and unescaped `<` in SVG text | current | - |
 | FR-D7 | polish applied to the `update` and `workflow` figures | current | FR-D2, FR-Q1 |
 | FR-D8 | lesson: a web font can fall back without a WARN | current | FR-D6 |
+| FR-D9 | landing page structure, hero and interactive figures | current | FR-D1, FR-D5 |
 
 ## Closed decisions
 
@@ -103,6 +104,16 @@ code_ref: "uncommitted"
 **What disproved it.** `hero-dark.webp` came out in a serif fallback after the FR-D7 run; the same command a moment later rendered Chakra Petch and JetBrains Mono.
 
 **What breaks if ignored.** A fallback image is committed and every reader sees the wrong typeface.
+
+### FR-D9: landing page is a stack of blueprint sheets with visitor-driven machines
+
+**Decided.** Root `index.html`, single file, no kicker line on any sheet. Sheets in order: hero (title `The blueprint for every agent-skill repository.`, press that stamps a `<repo_name>` crate once on load and on click, `See how it works` scroll button; nothing else), work order (five switches rewrite the `--data` command from `AGENT-GUIDE.md`, centered run and reset, copy button inside the terminal, run stamps each part, `pytest + ruff` lamp), agent (short: title, tag-pinned guide link, copy button, robot head reading the guide card, then watching the switches flip), why (bench checklist races the press), stay in sync (crate under `copier update`, diff sheet), `Open the foundry.` (GitHub call, hall door opens on hover or focus). Same signature as FR-D1; README banner not reused. Social preview `assets/og.png` from `assets/source/og.html`; favicon `assets/favicon.svg`. At 700 px and below the work order, why and stay in sync figures switch to a vertical layout (viewBox 400 wide, rebuilt when the width class changes), the hero crops its margins and hides `click the press`, and below 600 px the header hides the How / Why / Update links.
+
+**Why.** User chose round 5 direction 5A, with 5B's race as the explanation and 5C's update sheet; the hero title is a pitch and the interactive guide sits in its own sheet.
+
+**What breaks if ignored.** A guide as the hero title reads as instructions, not a pitch; a closing sheet that tells the visitor what to do reads as an order and loses the GitHub click.
+
+**Rejected, round 4:** control room alone (dashboard, not factory), press shop alone (parts, not steps), blueprint flowchart alone (generic); user kept their button style, colors, three actions, blueprint background and floating sheet, press shapes and switch interaction. **Rejected, round 5:** 5A sheet 3 `Read every part first.` (an order, not marketing); 5B and 5C as whole pages. **Rejected after review:** copy command and buttons in the hero (the hero is the pitch; commands live in the work order); agent step chain and description (made the sheet long). **Rejected for phones:** shrinking the wide figures to fit (labels near 4 px) and keeping a sideways scroll with auto-scroll (the visitor sees one part of the machine at a time).
 
 ## Open questions
 

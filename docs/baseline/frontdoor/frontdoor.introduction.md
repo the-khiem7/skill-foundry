@@ -13,7 +13,9 @@ code_ref: "uncommitted"
 
 The public front door of the foundry: `README.md`, its illustrations in light and dark, and the HTML sources that render them. Built with the `frontdoor-readme` and `frontdoor-illustrate` skills.
 
-Out of scope: the template, `AGENT-GUIDE.md` content, `copier.yml`, a landing page, pushing or publishing.
+The GitHub Pages landing page `index.html` at the root, its social preview and favicon (FR-D9), built with `frontdoor-landing`.
+
+Out of scope: the template, `AGENT-GUIDE.md` content, `copier.yml`, pushing or publishing, switching on Pages.
 
 ## Current truth
 
@@ -24,6 +26,7 @@ Out of scope: the template, `AGENT-GUIDE.md` content, `copier.yml`, a landing pa
 | Sources | `assets/source/`: `hero.html`, `figures.html`, `iso.js`, `figures.js`, `shared.css`, `shared.js` |
 | Design rounds | three rounds on the local board `.frontdoor/directions.html`, git-ignored (FR-D3) |
 | Verification | foundry suite 22 passed, ruff clean, `render.py` no WARN; not viewed on github.com |
+| Landing page | `index.html`, `assets/og.png`, `assets/favicon.svg`, `assets/source/og.html`; uncommitted; Pages not enabled |
 
 ## Target
 
