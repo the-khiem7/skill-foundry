@@ -12,7 +12,7 @@ code_ref: "unknown"
 | Phase | Outcome | Depends on | Status |
 |---|---|---|---|
 | SF-P1 | foundry skeleton and copier config | - | complete |
-| SF-P2 | `template/` harness, scripts, example skill | SF-P1 | planned |
+| SF-P2 | `template/` harness, scripts, example skill | SF-P1 | complete |
 | SF-P3 | optional kit | SF-P2 | planned |
 | SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | planned |
 | SF-P5 | end-to-end verification and initial commit | SF-P4 | planned |
@@ -41,6 +41,8 @@ Acceptance criteria:
 - `AGENTS.md` and `README.md`, including one line: commits follow Conventional Commits with the skill name as scope
 
 Verification gate: in a rendered repository, pytest, `ruff check` and `ruff format --check` pass; `new_skill.py demo` then pytest passes.
+
+Evidence: rendered with `repo_name=probe`, `with_kit=false`: 21 passed, `ruff check` and `ruff format --check` clean, then `new_skill.py demo` and 27 passed; `license=none` renders no `LICENSE`. Both `ruff.toml` files ignore E501 (SF-D2).
 
 ## SF-P3: optional kit
 
