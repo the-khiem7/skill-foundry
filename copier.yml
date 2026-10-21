@@ -1,0 +1,35 @@
+_min_copier_version: "9.0.0"
+_subdirectory: template
+_answers_file: .copier-answers.yml
+
+repo_name:
+  type: str
+  help: Repository name, lowercase letters, digits and single hyphens
+  validator: >-
+    {% if not (repo_name | regex_search('^[a-z][a-z0-9]*(-[a-z0-9]+)*$')) %}repo_name must be lowercase letters, digits and single hyphens{% endif %}
+
+skill_prefix:
+  type: str
+  help: Folder prefix of every skill, so skills are named <prefix>-<name>
+  default: "{{ repo_name }}"
+  validator: >-
+    {% if not (skill_prefix | regex_search('^[a-z][a-z0-9]*(-[a-z0-9]+)*$')) %}skill_prefix must be lowercase letters, digits and single hyphens{% endif %}
+
+github_owner:
+  type: str
+  help: GitHub user or organization that will own the repository
+  default: the-khiem7
+
+license:
+  type: str
+  help: License of the generated repository
+  default: MIT
+  choices:
+    - MIT
+    - Apache-2.0
+    - none
+
+with_kit:
+  type: bool
+  help: Add a read-only POSIX shell kit with its packaged copy and tests
+  default: true

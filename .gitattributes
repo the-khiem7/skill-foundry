@@ -1,0 +1,10 @@
+# Generated repositories compare packaged copies byte for byte and run sh
+# scripts, so every text asset is LF in every working tree.
+*.md    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.py    text eol=lf
+*.ini   text eol=lf
+*.toml  text eol=lf
+*.sh    text eol=lf
+*.jinja text eol=lf
