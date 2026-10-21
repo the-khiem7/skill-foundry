@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>skill-foundry: the blueprint for every agent-skill repository</title>
+<meta name="description" content="A copier template for agent-skill repositories. Answer five questions and get tests, release scripts, rules, a formatter and CI already passing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="skill-foundry: the blueprint for every agent-skill repository">
+<meta property="og:description" content="Answer five questions and get an agent-skill repository with tests, release scripts, rules, a formatter and CI already passing.">
+<meta property="og:url" content="https://the-khiem7.github.io/skill-foundry/">
+<meta property="og:image" content="https://the-khiem7.github.io/skill-foundry/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="skill-foundry">
+<meta name="twitter:description" content="The blueprint for every agent-skill repository.">
+<meta name="twitter:image" content="https://the-khiem7.github.io/skill-foundry/assets/og.png">
+<meta name="theme-color" content="#eceee9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11161c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}document.documentElement.classList.add("js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
+<!--
+Signature (same as assets/source/hero.html):
+Concept: a factory hall where copier is a production line; answers in, tested repo out. The page is a stack of blueprint sheets.
+Shape language: flat steel blocks, press frame, switches, dashed leader lines, sheets with a title block, hard offset shadows.
+Typeface: Chakra Petch display, JetBrains Mono for commands and labels, ligatures off.
+Palette: steel greys plant, safety yellow input and actions, pass green tests, cardboard product; dark mode is the hall at night.
+Presentation: every figure is a machine the visitor drives; every label is a command or file from the repository.
+Not: gradients, blue-purple SaaS glow, stock icons, rounded card stacks.
+-->
+<style>
+:root{--paper:#eceee9;--sheet:#f7f8f5;--ink:#17202b;--muted:#4a5562;--grid:#d9ddd7;--steel:#aeb8c3;--steel2:#8f9bab;--press:#3f4a58;--yellow:#f2b705;--green:#1a7448;--lampok:#24935c;--crate:#c4935a;--red:#c23a2b;--belt:#2a323c;--ghost:#ffe9a3;--shadow:rgba(23,32,43,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#11161c;--sheet:#161d25;--ink:#e9eef3;--muted:#a2adb9;--grid:#1e2630;--steel:#56626f;--steel2:#3a444f;--press:#4d5b6b;--yellow:#ffcf33;--green:#4fd18f;--lampok:#4fd18f;--crate:#a47643;--red:#ff6b5b;--belt:#0a0e12;--ghost:#5a4c1c;--shadow:rgba(0,0,0,.45)}}
+:root[data-theme=dark]{--paper:#11161c;--sheet:#161d25;--ink:#e9eef3;--muted:#a2adb9;--grid:#1e2630;--steel:#56626f;--steel2:#3a444f;--press:#4d5b6b;--yellow:#ffcf33;--green:#4fd18f;--lampok:#4fd18f;--crate:#a47643;--red:#ff6b5b;--belt:#0a0e12;--ghost:#5a4c1c;--shadow:rgba(0,0,0,.45)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;color:var(--ink);font-family:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;font-variant-ligatures:none;background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;line-height:1.5}
+code,pre,.mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-variant-ligatures:none;font-feature-settings:"calt" 0,"liga" 0}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;flex-wrap:wrap}
+.logo{font-weight:700;letter-spacing:2px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.top nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.top nav a.l{font:600 15px "JetBrains Mono",monospace;text-decoration:none;padding:10px 8px;min-height:44px;display:inline-flex;align-items:center}
+.top nav a.l:hover{text-decoration:underline}
+.sheet{border:3px solid var(--ink);background:var(--sheet);margin:24px 0 40px;padding:32px 28px 64px;position:relative;box-shadow:10px 10px 0 var(--shadow)}
+@media(max-width:600px){.sheet{padding:22px 16px 60px;box-shadow:6px 6px 0 var(--shadow)}}
+.kick{font:600 13px "JetBrains Mono",monospace;letter-spacing:3px;color:var(--muted);margin:0}
+h1{font-size:clamp(40px,7vw,84px);line-height:.98;margin:.2em 0 .25em;letter-spacing:-1px}
+h2{font-size:clamp(28px,4vw,46px);line-height:1.05;margin:.25em 0 .3em}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:640px;margin:0 0 20px}
+.tb{position:absolute;right:0;bottom:0;border-left:3px solid var(--ink);border-top:3px solid var(--ink);padding:8px 14px;font:600 12px "JetBrains Mono",monospace;background:var(--sheet)}
+.btn{font:600 16px "Chakra Petch",sans-serif;border:2px solid var(--ink);background:var(--sheet);color:var(--ink);padding:10px 18px;min-height:44px;cursor:pointer;transition:transform .12s,box-shadow .12s,background .2s;box-shadow:4px 4px 0 var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin:4px 8px 8px 0}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn:focus-visible,.sw:focus-visible,.hit:focus-visible,.scr:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:4px 4px 0 var(--ink)}
+.btn.go{background:var(--yellow);color:#17202b}
+.btn.big{font-size:20px;padding:14px 26px}
+.btn.done{background:var(--green);color:var(--sheet)}
+.status{font:14px "JetBrains Mono",monospace;color:var(--muted);min-height:1.5em;margin:6px 0}
+.scr{overflow-x:auto;margin:8px 0}
+svg.fig{width:100%;min-width:760px;height:auto;display:block}
+.sw,.hit{cursor:pointer}
+.lbl{font:600 13px "JetBrains Mono",monospace;fill:#e9eef3}.val{font:600 13px "JetBrains Mono",monospace;fill:#ffd23f}
+.pt{font:600 13px "JetBrains Mono",monospace;fill:#17202b}.tw{font:700 15px "Chakra Petch",sans-serif;fill:#ffd23f;letter-spacing:2px}
+.ink{font:600 13px "JetBrains Mono",monospace;fill:var(--ink)}.dim{font:12px "JetBrains Mono",monospace;fill:var(--muted)}
+pre.cmd{background:var(--belt);color:#e9eef3;padding:14px 16px;font-size:14px;line-height:1.6;overflow-x:auto;margin:12px 0;white-space:pre}
+pre.cmd b{color:#ffd23f;font-weight:600}
+.cmdrow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:8px 0 4px}
+.cmdrow pre.cmd{margin:0;flex:1 1 420px;min-width:0}
+.hero>div{min-width:0}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.hero svg{width:100%;height:auto;display:block;max-width:560px;margin:0 auto}
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.qs li{border:2px solid var(--ink);padding:10px 12px;font-size:15px}
+.qs code{font-weight:600}
+.row2>div{min-width:0}.row2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+@media(max-width:900px){.row2{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px;padding:0;list-style:none}
+.chips li{font:600 13px "JetBrains Mono",monospace;border:2px dashed var(--ink);padding:6px 10px}
+footer{padding:8px 0 48px;font:14px "JetBrains Mono",monospace;color:var(--muted)}
+footer a{margin-right:16px}
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+.ctl{text-align:center;margin:8px 0}.ctl .btn{margin:4px 6px 8px}
+.term{position:relative;margin:12px 0}.term pre.cmd{margin:0;padding-right:200px}
+.term .cp{position:absolute;top:10px;right:10px;margin:0;box-shadow:3px 3px 0 #000;border-color:#e9eef3;background:#3a444f;color:#e9eef3}
+.term.mid .cp{top:50%;transform:translateY(-50%)}.term.mid .cp:hover{transform:translate(-2px,calc(-50% - 2px))}.term.mid .cp:active{transform:translate(2px,calc(-50% + 2px))}
+.term .cp.done{background:var(--green);color:#0d1a12}
+.term.link{max-width:560px}.term.link pre.cmd{padding-right:16px;font-size:13px;white-space:pre-wrap;word-break:break-all}
+@media(max-width:700px){.term pre.cmd{padding-right:16px;padding-bottom:64px}.term .cp,.term.mid .cp{top:auto;bottom:10px;transform:none}}
+.down{margin-top:18px}.down span{display:inline-block}
+@media (prefers-reduced-motion:no-preference){.down span{animation:bob 1.6s ease-in-out infinite}}
+@keyframes bob{50%{transform:translateY(5px)}}
+.hero h1{margin-top:0}.lede.wide{max-width:none}
+@media(max-width:700px){svg.fig{min-width:0}.hint{display:none}}
+@media(max-width:600px){.top nav a.l{display:none}.top,.top nav{flex-wrap:nowrap}.top .btn{margin:0 0 4px;padding:8px 12px}.logo{gap:6px;font-size:15px}.ctl .btn{padding:10px 14px;margin:4px 3px 8px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <a class="logo" href="#top" id="top"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="7" fill="var(--press)"/><rect x="5" y="10" width="4" height="19" fill="var(--steel2)"/><rect x="23" y="10" width="4" height="19" fill="var(--steel2)"/><rect x="11" y="13" width="10" height="5" fill="var(--yellow)"/><rect x="9" y="24" width="14" height="5" fill="var(--press)"/></svg>SKILL&#8209;FOUNDRY</a>
+ <nav aria-label="Sections">
+  <a class="l" href="#order">How</a><a class="l" href="#why">Why</a><a class="l" href="#sync">Update</a>
+  <button class="btn" id="theme" aria-pressed="false" aria-label="Dark theme">Dark</button>
+  <a class="btn" href="https://github.com/the-khiem7/skill-foundry">GitHub</a>
+ </nav>
+</header>
+<main>
+<section class="sheet" aria-labelledby="h1">
+ <div class="hero">
+  <div>
+   <h1 id="h1">The blueprint for every agent-skill repository.</h1>
+   <a class="btn go big down" href="#order">See how it works <span aria-hidden="true">&#8595;</span></a>
+  </div>
+  <div>
+   <svg viewBox="0 0 560 420" id="hf" role="group" aria-label="A stamping press labelled copier copy stamps out a crate labelled repo_name, then a green pytest and ruff lamp lights. Press the stamp again button to replay."></svg>
+  </div>
+ </div>
+ <div class="tb">SF-01 &middot; SHEET 1 OF 6</div>
+</section>
+
+<section class="sheet rv" id="order" aria-labelledby="h2o">
+ <h2 id="h2o">Your five answers are the order.<br>The press makes the repo.</h2>
+ <p class="lede wide">Flip the switches. The command below rewrites itself with every answer, then press run and watch copier stamp each part of the repository and the generated suite pass.</p>
+ <div class="scr" tabindex="0" aria-label="Work order figure, scrolls sideways">
+  <svg class="fig" viewBox="0 0 1120 330" id="f1" role="group" aria-label="A control pad with the five copier questions as switches. Run makes a press labelled copier copy stamp each part of the repository onto a belt, then a green pytest and ruff lamp lights."></svg></div>
+ <div class="ctl"><button class="btn go" id="r1">Run the order</button><button class="btn" id="x1" disabled>Reset</button>
+ <p class="status" id="t1" aria-live="polite">Waiting for the order. Flip any switch.</p></div>
+ <div class="term"><pre class="cmd" tabindex="0" id="c1"></pre><button class="btn cp" data-copy="c1">Copy this command</button></div>
+ <ul class="qs">
+  <li><code>repo_name</code><br>lowercase letters, digits and single hyphens</li>
+  <li><code>skill_prefix</code><br>every skill folder is <code>&lt;prefix&gt;-&lt;name&gt;</code></li>
+  <li><code>github_owner</code><br>default <code>the-khiem7</code></li>
+  <li><code>license</code><br><code>MIT</code>, <code>Apache-2.0</code> or <code>none</code></li>
+  <li><code>with_kit</code><br>adds a read-only POSIX shell kit and its tests</li>
+ </ul>
+ <div class="tb">SHEET 2 OF 6</div>
+</section>
+
+<section class="sheet rv" id="agent" aria-labelledby="h2a">
+ <div class="row2">
+  <div>
+   <h2 id="h2a">Hand the order to an agent.</h2>
+   <div class="term link"><pre class="cmd" tabindex="0" id="c3">https://raw.githubusercontent.com/the-khiem7/skill-foundry/v1.0.0/AGENT-GUIDE.md</pre></div>
+   <button class="btn go" data-copy="c3">Copy guide link</button>
+  </div>
+  <div>
+   <svg viewBox="0 0 480 240" id="f5" role="img" aria-label="A robot head reads a guide card labelled AGENT-GUIDE.md, then looks at a control pad while its five switches flip one by one." style="width:100%;height:auto;max-width:480px;display:block;margin:0 auto"></svg>
+  </div>
+ </div>
+ <div class="tb">SHEET 3 OF 6</div>
+</section>
+<section class="sheet rv" id="why" aria-labelledby="h2w">
+ <h2 id="h2w">Stop hand-building the plumbing.</h2>
+ <p class="lede">Every new skill family needs the same parts before the first real skill lands. Race the bench against the press: one builds them one by one, the other casts them in one stroke.</p>
+ <div class="scr" tabindex="0" role="img" aria-label="Two lanes. On the bench lane a checklist is ticked one item at a time while a clock turns: test harness, version stamp, release script, house rules, formatter config, CI on Ubuntu macOS and Windows, example skill, license. On the press lane a press labelled copier copy stamps once, every part comes out together and a green pytest and ruff lamp lights.">
+  <svg class="fig" viewBox="0 0 1120 445" id="f2" aria-hidden="true"></svg></div>
+ <div class="ctl"><button class="btn go" id="r2">Race them</button><button class="btn" id="c2b">Cast only</button><button class="btn" id="x2">Reset</button>
+ <p class="status" id="t2" aria-live="polite">Both lanes are waiting.</p></div>
+ <div class="tb">SHEET 4 OF 6</div>
+</section>
+
+
+<section class="sheet rv" id="sync" aria-labelledby="h2s">
+ <h2 id="h2s">The foundry improves. Your repo follows.</h2>
+ <p class="lede wide">copier records your answers, so later foundry fixes merge into your repository with one command. Review the diff and any conflict before you commit.</p>
+ <div class="scr" tabindex="0" role="img" aria-label="Your repository crate rolls under a press labelled copier update. A part labelled newer template drops in, the press stamps, and the crate rolls out next to a diff sheet labelled review the diff, then commit.">
+  <svg class="fig" viewBox="0 0 1120 330" id="f3" aria-hidden="true"></svg></div>
+ <div class="ctl"><button class="btn go" id="r3">Pull the update</button><button class="btn" id="x3">Reset</button>
+ <p class="status" id="t3" aria-live="polite">Your repository is on the rack.</p></div>
+ <div class="term mid"><pre class="cmd" tabindex="0" id="c4">uvx --from "copier&gt;=9,&lt;10" copier update --defaults</pre><button class="btn cp" data-copy="c4">Copy update command</button></div>
+ <div class="tb">SHEET 5 OF 6</div>
+</section>
+
+<section class="sheet rv" id="open" aria-labelledby="h2g">
+ <div class="row2">
+  <div>
+   <h2 id="h2g">Open the foundry.</h2>
+   <p class="lede">Every part of the line is on GitHub. Cast your first skill repository today, and send a fix back when the line can do better.</p>
+   <ul class="chips"><li>no --trust, ever</li><li>pinned copier 9</li><li>pinned guide</li><li>nothing pushed for you</li></ul>
+   <a class="btn go big" id="gh" href="https://github.com/the-khiem7/skill-foundry">Open on GitHub</a>
+  </div>
+  <div role="img" aria-label="A factory hall door marked skill-foundry. It rolls open when you point at the GitHub button, showing the line inside.">
+   <svg viewBox="0 0 480 320" id="f4" aria-hidden="true" style="width:100%;height:auto;max-width:480px;display:block;margin:0 auto"></svg>
+  </div>
+ </div>
+ <div class="tb">SHEET 6 OF 6</div>
+</section>
+</main>
+<footer><a href="https://github.com/the-khiem7/skill-foundry#readme">README</a><a href="https://raw.githubusercontent.com/the-khiem7/skill-foundry/v1.0.0/AGENT-GUIDE.md">AGENT-GUIDE.md</a><span>skill-foundry, a copier template</span></footer>
+<p class="sr" id="live" aria-live="polite"></p>
+</div>
+<script>
+var NS="http://www.w3.org/2000/svg",NQ=matchMedia("(max-width: 700px)"),N=NQ.matches,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,K=reduce?.35:1;
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+// each figure keeps its own animations and timers so one reset never stops another figure
+function Run(){this.A=[];this.T=[]}
+Run.prototype.an=function(e,k,o){o.duration=(o.duration||400)*K;if(o.delay)o.delay*=K;var a=e.animate(k,o);this.A.push(a);return a};
+Run.prototype.later=function(f,ms){this.T.push(setTimeout(f,ms*K))};
+Run.prototype.stop=function(){this.A.forEach(function(a){a.cancel()});this.T.forEach(clearTimeout);this.A=[];this.T=[]};
+var Q=[["repo_name",["my-skills","agent-kit"]],["skill_prefix",["my","ak"]],["github_owner",["the-khiem7","your-name"]],["license",["MIT","Apache-2.0","none"]],["with_kit",["true","false"]]];
+function pad(p,x,y,run,on){var g=el("g",{},p),s=Q.map(function(){return 0});
+ el("rect",{x:x,y:y,width:340,height:280,rx:6,fill:"var(--press)"},g);
+ Q.forEach(function(q,i){var yy=y+18+i*50,w=el("g",{class:"sw",tabindex:"0",role:"button"},g);
+  el("text",{x:x+18,y:yy+20,class:"lbl"},w).textContent=q[0];
+  el("rect",{x:x+150,y:yy+4,width:56,height:24,rx:12,fill:"#2a323c"},w);
+  var k=el("circle",{cx:x+164,cy:yy+16,r:10,fill:"#ffd23f"},w),v=el("text",{x:x+220,y:yy+21,class:"val"},w);v.textContent=q[1][0];
+  function f(){s[i]=(s[i]+1)%q[1].length;v.textContent=q[1][s[i]];run.an(k,[{transform:"none"},{transform:"translateX(28px)"},{transform:"none"}],{duration:300});on(val())}
+  w.addEventListener("click",f);w.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();f()}})});
+ function val(){var o={};Q.forEach(function(q,i){o[q[0]]=q[1][s[i]]});return o}
+ return {val:val}}
+function press(p,x,y,label,run){var g=el("g",{},p);
+ el("rect",{x:x+20,y:y+20,width:30,height:270,fill:"var(--steel)"},g);el("rect",{x:x+250,y:y+20,width:30,height:270,fill:"var(--steel)"},g);
+ el("rect",{x:x,y:y,width:300,height:60,fill:"var(--press)"},g);el("text",{x:x+150,y:y+37,"text-anchor":"middle",class:"tw"},g).textContent=label;
+ var ram=el("g",{},g);el("rect",{x:x+115,y:y+60,width:70,height:50,fill:"var(--steel2)"},ram);el("rect",{x:x+85,y:y+110,width:130,height:30,fill:"var(--yellow)"},ram);
+ el("rect",{x:x+70,y:y+240,width:160,height:50,fill:"var(--press)"},g);
+ return {g:g,stamp:function(){return run.an(ram,[{transform:"none"},{transform:"translateY(95px)",offset:.4},{transform:"none"}],{duration:600,easing:"ease-in"})}}}
+function part(p,label,ghost){var g=el("g",{},p);
+ el("rect",{x:-78,y:-14,width:156,height:28,fill:ghost?"var(--ghost)":"#fff",stroke:"#17202b","stroke-width":2,"stroke-dasharray":ghost?"6 4":"none"},g);
+ var t=el("text",{"text-anchor":"middle",y:5,class:"pt"},g);t.textContent=label;if(ghost)t.style.fill="var(--ink)";return g}
+function parts(v){var f=["tests/","scripts/",".github/workflows/","AGENTS.md",v.skill_prefix+"-example/"];if(v.with_kit=="true")f.push("contract/kit.sh");f.push(v.license=="none"?"README.md":"LICENSE "+v.license,".copier-answers.yml");return f}
+function lampAt(p,x,y){var c=el("circle",{cx:x,cy:y,r:14,fill:"var(--steel2)"},p);el("text",{x:x-22,y:y+5,"text-anchor":"end",class:"ink"},p).textContent="pytest + ruff";return c}
+
+// hero: one stamp on load, again on every click of the press
+(function(){var svg=document.getElementById("hf"),run=new Run();
+ for(var i=0;i<=560;i+=40)el("line",{x1:i,y1:400,x2:i,y2:408,stroke:"var(--muted)","stroke-width":1},svg);
+ el("line",{x1:0,y1:404,x2:560,y2:404,stroke:"var(--muted)","stroke-width":1},svg);
+ el("rect",{x:300,y:330,width:260,height:12,fill:"var(--belt)"},svg);
+ var pr=press(svg,40,40,"COPIER COPY",run),blank=el("rect",{x:150,y:255,width:80,height:20,fill:"var(--steel)"},svg);
+ var crate=el("g",{},svg);el("rect",{x:-60,y:-36,width:120,height:72,fill:"var(--crate)"},crate);el("rect",{x:-60,y:-6,width:120,height:12,fill:"#f3dcb5"},crate);
+ el("text",{"text-anchor":"middle",y:4,class:"pt"},crate).textContent="<repo_name>";
+ var lamp=lampAt(svg,530,60);el("text",{x:190,y:30,"text-anchor":"middle",class:"dim hint"},svg).textContent="click the press";
+ var hit=el("rect",{x:40,y:40,width:300,height:290,fill:"transparent",class:"hit",tabindex:"0",role:"button","aria-label":"Stamp again"},svg);
+ function end(){run.an(crate,[{transform:"translate(470px,292px)",opacity:1}],{duration:1,fill:"forwards"});blank.setAttribute("opacity",0);lamp.setAttribute("fill","var(--lampok)")}
+ function go(){run.stop();blank.setAttribute("opacity",1);lamp.setAttribute("fill","var(--steel2)");run.an(crate,[{opacity:0}],{duration:1,fill:"forwards"});
+  run.later(function(){pr.stamp();run.later(function(){blank.setAttribute("opacity",0)},250);
+   run.an(crate,[{transform:"translate(190px,292px) scale(.3)",opacity:0},{transform:"translate(190px,292px) scale(1)",opacity:1,offset:.3},{transform:"translate(470px,292px)"}],{duration:1300,delay:250,fill:"forwards",easing:"ease-out"});
+   run.later(function(){lamp.setAttribute("fill","var(--lampok)");run.an(lamp,[{r:14},{r:22},{r:14}],{duration:500})},1600)},150)}
+ hit.addEventListener("click",go);hit.addEventListener("keydown",function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();go()}});
+ function fit(){svg.setAttribute("viewBox",NQ.matches?"34 36 530 375":"0 0 560 420")}fit();NQ.addEventListener("change",fit);
+ if(reduce)end();else go();})();
+
+// work order: switches rewrite the command, run stamps the parts
+// wide figures get a vertical layout on a phone and are rebuilt when the width class changes
+function fig(id,build){var svg=document.getElementById(id),run=new Run();function b(){run.stop();svg.innerHTML="";N=NQ.matches;build(svg,run)}b();NQ.addEventListener("change",b)}
+fig("f1",function(svg,run){var st=document.getElementById("t1"),r=document.getElementById("r1"),x=document.getElementById("x1"),c=document.getElementById("c1");
+ function esc(s){return s.replace(/</g,"&lt;")}
+ function cmd(v){c.innerHTML='uvx --from "copier&gt;=9,&lt;10" copier copy --defaults \\\n'+Q.map(function(q){return "  --data "+q[0]+"=<b>"+esc(v[q[0]])+"</b> \\"}).join("\n")+"\n  gh:the-khiem7/skill-foundry <b>"+esc(v.repo_name)+"</b>"}
+ svg.setAttribute("viewBox",N?"0 0 400 830":"0 0 1120 330");
+ var p=pad(svg,N?30:10,N?10:20,run,cmd),px=N?50:400,py=N?310:20,pr=press(svg,px,py,"COPIER COPY",run),out=el("g",{},svg);
+ el("path",{d:N?"M200 290 V310":"M350 160 H400",stroke:"var(--ink)","stroke-width":3,"stroke-dasharray":"6 5"},svg);
+ el("rect",N?{x:20,y:770,width:360,height:10,fill:"var(--belt)"}:{x:700,y:296,width:400,height:14,fill:"var(--belt)"},svg);var lamp=N?lampAt(svg,370,805):lampAt(svg,1080,40);cmd(p.val());
+ r.onclick=function(){r.disabled=true;var v=p.val(),f=parts(v);st.textContent="Running copier copy for "+v.repo_name;
+  f.forEach(function(n,i){run.later(function(){pr.stamp();var g=part(out,n,n=="contract/kit.sh");
+   var cx=px+150,cy=py+230;run.an(g,N?[{transform:"translate("+cx+"px,"+cy+"px) scale(.2)",opacity:0},{transform:"translate("+cx+"px,"+(cy+12)+"px) scale(1)",opacity:1,offset:.3},{transform:"translate("+(i%2?295:105)+"px,"+(640+Math.floor(i/2)*36)+"px)"}]:[{transform:"translate(550px,250px) scale(.2)",opacity:0},{transform:"translate(550px,262px) scale(1)",opacity:1,offset:.3},{transform:"translate(760px,282px)",offset:.6},{transform:"translate(920px,"+(270-i*30)+"px)"}],{duration:1100,delay:240,fill:"both",easing:"ease-out"});
+   st.textContent="Stamped "+n},i*750)});
+  run.later(function(){lamp.setAttribute("fill","var(--lampok)");run.an(lamp,[{r:14},{r:22},{r:14}],{duration:500});st.textContent="Done: every part stamped, and the generated suite passes.";x.disabled=false;x.focus()},f.length*750+1300)};
+ x.onclick=function(){run.stop();out.innerHTML="";lamp.setAttribute("fill","var(--steel2)");var fo=document.activeElement==x;r.disabled=false;x.disabled=true;st.textContent="Waiting for the order. Flip any switch.";if(fo)r.focus()};x.onclick();});
+
+// why: the bench against the press
+fig("f2",function(svg,run){var st=document.getElementById("t2"),ox=N?60:90,oy=N?70:75;svg.setAttribute("viewBox",N?"0 0 400 870":"0 0 1120 445");
+ var L=["test harness","version stamp","release script","house rules","formatter config","CI on three OSes","example skill","license"];
+ el("text",N?{x:120,y:76,class:"ink"}:{x:10,y:16,class:"ink"},svg).textContent="BY HAND";el("text",N?{x:20,y:330,class:"ink"}:{x:360,y:180,class:"ink"},svg).textContent="SKILL-FOUNDRY";
+ el("rect",{x:0,y:N?300:140,width:1120,height:4,fill:"var(--ink)"},svg);
+ el("circle",{cx:ox,cy:oy,r:N?40:45,fill:"none",stroke:"var(--ink)","stroke-width":4},svg);var hand=el("rect",{x:ox-3,y:oy-(N?34:37),width:6,height:N?36:39,fill:"var(--red)"},svg);
+ var ticks=L.map(function(t,i){var x=N?20+(i%2)*190:200+(i%4)*225,y=N?130+Math.floor(i/2)*42:40+Math.floor(i/4)*50,g=el("g",{},svg);
+  el("rect",{x:x,y:y,width:26,height:26,fill:"none",stroke:"var(--ink)","stroke-width":3},g);
+  var c=el("path",{d:"M"+(x+5)+" "+(y+13)+" l7 7 l12 -16",stroke:"var(--lampok)","stroke-width":4,fill:"none",opacity:0},g);
+  el("text",{x:x+36,y:y+18,class:"ink"},g).textContent=t;return c});
+ var pr=press(svg,N?50:40,N?340:155,"COPIER COPY",run),out=el("g",{},svg);el("rect",N?{x:20,y:810,width:360,height:10,fill:"var(--belt)"}:{x:340,y:415,width:780,height:14,fill:"var(--belt)"},svg);var lamp=N?lampAt(svg,370,845):lampAt(svg,1080,190);
+ var o=ox+"px "+oy+"px";function bench(){run.an(hand,[{transform:"rotate(0deg)",transformOrigin:o},{transform:"rotate(1440deg)",transformOrigin:o}],{duration:L.length*900,fill:"forwards"});
+  ticks.forEach(function(c,i){run.later(function(){c.setAttribute("opacity",1);st.textContent="By hand: "+L[i]},(i+1)*900)});
+  run.later(function(){st.textContent="The bench is done. The press finished long ago."},(L.length+1)*900)}
+ function cast(){pr.stamp();var f=parts({skill_prefix:"prefix",with_kit:"true",license:"MIT"});
+  f.forEach(function(n,i){var g=part(out,n,n=="contract/kit.sh");var sx=N?200:190,sy=N?570:355,end=N?"translate("+(i%2?295:105)+"px,"+(680+Math.floor(i/2)*36)+"px)":"translate("+(440+(i%4)*170)+"px,"+(285+Math.floor(i/4)*60)+"px)";run.an(g,[{transform:"translate("+sx+"px,"+sy+"px) scale(.2)",opacity:0},{transform:"translate("+sx+"px,"+(sy+10)+"px) scale(1)",opacity:1,offset:.25},{transform:end}],{duration:900,delay:240+i*40,fill:"both",easing:"cubic-bezier(.2,1.4,.4,1)"})});
+  run.later(function(){lamp.setAttribute("fill","var(--lampok)");run.an(lamp,[{r:14},{r:22},{r:14}],{duration:500});st.textContent="Cast: every part in one stroke, suite green."},1500)}
+ function reset(){run.stop();out.innerHTML="";ticks.forEach(function(c){c.setAttribute("opacity",0)});lamp.setAttribute("fill","var(--steel2)");st.textContent="Both lanes are waiting."}
+ document.getElementById("r2").onclick=function(){reset();bench();cast()};
+ document.getElementById("c2b").onclick=function(){reset();cast()};
+ document.getElementById("x2").onclick=reset;reset()});
+
+// stay in sync: the crate goes back under copier update
+fig("f3",function(svg,run){var st=document.getElementById("t3"),pr=press(svg,N?50:400,20,"COPIER UPDATE",run),C=N?200:550;svg.setAttribute("viewBox",N?"0 0 400 610":"0 0 1120 330");
+ el("rect",N?{x:0,y:296,width:400,height:14,fill:"var(--belt)"}:{x:60,y:296,width:1040,height:14,fill:"var(--belt)"},svg);
+ if(N)el("path",{d:"M200 310 V520",stroke:"var(--ink)","stroke-width":3,"stroke-dasharray":"6 5"},svg);
+ var crate=el("g",{},svg);el("rect",{x:-90,y:-40,width:180,height:80,fill:"var(--crate)"},crate);el("rect",{x:-90,y:-6,width:180,height:12,fill:"#f3dcb5"},crate);
+ el("text",{"text-anchor":"middle",y:4,class:"pt"},crate).textContent="your repo";
+ var neu=part(svg,"newer template",true),diff=el("g",{},svg);
+ var dx=N?90:860,dy=N?340:4,home=N?"translate(200px,560px)":"translate(160px,256px)",under="translate("+C+"px,256px)",done=N?home:"translate(970px,256px)";
+ el("rect",{x:dx,y:dy,width:220,height:140,fill:"#fff",stroke:"#17202b","stroke-width":2},diff);
+ el("text",{x:dx+20,y:dy+28,class:"pt"},diff).textContent=".copier-answers.yml";
+ [["+ template fix","#1a7448"],["- old line","#a02a1e"],["+ new line","#1a7448"]].forEach(function(s,i){var t=el("text",{x:dx+20,y:dy+60+i*26,class:"pt"},diff);t.textContent=s[0];t.style.fill=s[1]});
+ el("text",{x:dx+110,y:dy+162,"text-anchor":"middle",class:"ink"},svg).textContent="review the diff, then commit";
+ function place(){run.an(crate,[{transform:home}],{duration:1,fill:"forwards"});run.an(neu,[{transform:"translate("+C+"px,90px)",opacity:0}],{duration:1,fill:"forwards"});run.an(diff,[{opacity:.15}],{duration:1,fill:"forwards"})}
+ place();
+ document.getElementById("r3").onclick=function(){run.stop();place();st.textContent="Your repository rolls under the press";
+  run.an(crate,[{transform:home},{transform:under}],{duration:800,fill:"forwards",easing:"ease-in-out"});
+  run.later(function(){run.an(neu,[{transform:"translate("+C+"px,90px)",opacity:1},{transform:"translate("+C+"px,200px)",opacity:1,offset:.7},{transform:"translate("+C+"px,210px) scale(0)",opacity:0}],{duration:700,fill:"forwards"});pr.stamp();st.textContent="copier update merges the newer template"},900);
+  run.later(function(){run.an(crate,[{transform:under},{transform:done}],{duration:700,fill:"forwards"});run.an(diff,[{opacity:.15,transform:"translateY(20px)"},{opacity:1,transform:"none"}],{duration:400,fill:"forwards"});st.textContent="Review the diff and any conflict, then commit"},1800)};
+ document.getElementById("x3").onclick=function(){run.stop();place();st.textContent="Your repository is on the rack."};document.getElementById("x3").onclick()});
+
+// open the foundry: the hall door rolls up when the visitor points at the button
+(function(){var svg=document.getElementById("f4"),run=new Run();
+ el("path",{d:"M20 300 V110 L120 60 L120 110 L220 60 L220 110 L320 60 L320 110 L460 110 V300 Z",fill:"var(--steel)"},svg);
+ el("rect",{x:0,y:300,width:480,height:12,fill:"var(--ink)"},svg);
+ var inside=el("g",{},svg);el("rect",{x:110,y:150,width:260,height:150,fill:"var(--belt)"},inside);
+ el("rect",{x:140,y:250,width:200,height:10,fill:"var(--steel2)"},inside);
+ el("rect",{x:160,y:180,width:60,height:50,fill:"var(--press)"},inside);el("rect",{x:172,y:228,width:36,height:10,fill:"var(--yellow)"},inside);
+ el("rect",{x:260,y:214,width:50,height:36,fill:"var(--crate)"},inside);el("circle",{cx:340,cy:180,r:9,fill:"var(--lampok)"},inside);
+ var door=el("g",{},svg);el("rect",{x:110,y:150,width:260,height:150,fill:"var(--press)"},door);
+ for(var i=0;i<6;i++)el("rect",{x:110,y:150+i*25,width:260,height:3,fill:"var(--steel2)"},door);
+ el("rect",{x:110,y:136,width:260,height:14,fill:"var(--yellow)"},svg);
+ el("text",{x:240,y:222,"text-anchor":"middle",class:"tw"},door).textContent="SKILL-FOUNDRY";
+ var clip=el("clipPath",{id:"dc"},svg);el("rect",{x:110,y:150,width:260,height:150},clip);door.setAttribute("clip-path","url(#dc)");
+ var open=false,gh=document.getElementById("gh");
+ function set(o){if(o==open)return;open=o;run.stop();run.an(door,[{transform:o?"translateY(0)":"translateY(-140px)"},{transform:o?"translateY(-140px)":"translateY(0)"}],{duration:700,fill:"forwards",easing:"ease-in-out"})}
+ ["mouseenter","focus"].forEach(function(e){gh.addEventListener(e,function(){set(true)})});
+ ["mouseleave","blur"].forEach(function(e){gh.addEventListener(e,function(){set(false)})});
+ if("IntersectionObserver" in window&&!reduce){new IntersectionObserver(function(es,o){es.forEach(function(x){if(x.isIntersecting){set(true);setTimeout(function(){set(false)},1600);o.disconnect()}})},{threshold:.6}).observe(svg)}})();
+
+
+// agent: a robot head reads the guide card, then looks at the pad while each switch flips
+(function(){var svg=document.getElementById("f5"),run=new Run();
+ var card=el("g",{},svg);el("rect",{x:6,y:60,width:140,height:110,fill:"#fff",stroke:"#17202b","stroke-width":2},card);
+ el("text",{x:16,y:86,class:"pt"},card).textContent="AGENT-GUIDE.md";
+ for(var i=0;i<4;i++)el("rect",{x:16,y:102+i*16,width:i%2?80:116,height:6,fill:"#aeb8c3"},card);
+ el("rect",{x:330,y:40,width:144,height:170,rx:6,fill:"var(--press)"},svg);
+ var sw=[];for(var j=0;j<5;j++){el("rect",{x:346,y:54+j*30,width:46,height:20,rx:10,fill:"#2a323c"},svg);sw.push(el("circle",{cx:357,cy:64+j*30,r:8,fill:"#ffd23f"},svg));el("rect",{x:402,y:60+j*30,width:58,height:8,fill:"#56636f"},svg)}
+ el("rect",{x:236,y:30,width:4,height:26,fill:"var(--steel2)"},svg);var ant=el("circle",{cx:238,cy:28,r:8,fill:"var(--red)"},svg);
+ el("rect",{x:168,y:176,width:140,height:36,fill:"var(--steel2)"},svg);el("rect",{x:212,y:166,width:52,height:14,fill:"var(--steel)"},svg);
+ el("rect",{x:156,y:96,width:14,height:40,fill:"var(--steel2)"},svg);el("rect",{x:306,y:96,width:14,height:40,fill:"var(--steel2)"},svg);
+ el("rect",{x:168,y:56,width:140,height:112,rx:14,fill:"var(--steel)"},svg);
+ el("rect",{x:182,y:72,width:112,height:66,rx:8,fill:"#17202b"},svg);
+ var eyes=el("g",{},svg);el("rect",{x:204,y:92,width:18,height:22,rx:4,fill:"var(--lampok)"},eyes);el("rect",{x:254,y:92,width:18,height:22,rx:4,fill:"var(--lampok)"},eyes);
+ eyes.style.transformBox="fill-box";eyes.style.transformOrigin="center";var mouth=el("rect",{x:222,y:148,width:32,height:6,rx:3,fill:"var(--press)"},svg);
+ function look(dx,ms,d){run.an(eyes,[{transform:"translateX("+dx+"px)"}],{duration:ms,delay:d,fill:"forwards",easing:"ease-in-out"})}
+ function go(){run.stop();sw.forEach(function(s){run.an(s,[{transform:"none"}],{duration:1,fill:"forwards"})});
+  look(-16,300,0);run.an(eyes,[{transform:"translateX(-16px) scaleY(1)"},{transform:"translateX(-16px) scaleY(.2)",offset:.5},{transform:"translateX(-16px) scaleY(1)"}],{duration:300,delay:700});
+  run.later(function(){look(16,300,0)},1200);
+  sw.forEach(function(s,k){run.later(function(){run.an(s,[{transform:"none"},{transform:"translateX(24px)"}],{duration:200,fill:"forwards"});run.an(ant,[{opacity:1},{opacity:.2},{opacity:1}],{duration:300})},1600+k*380)});
+  run.later(function(){look(0,300,0);run.an(mouth,[{transform:"scaleX(1)",transformOrigin:"238px 151px"},{transform:"scaleX(1.6)",transformOrigin:"238px 151px"}],{duration:300,fill:"forwards"})},1600+5*380)}
+ svg.style.cursor="pointer";svg.addEventListener("click",go);
+ if(reduce){sw.forEach(function(s){s.setAttribute("cx",381)})}
+ else if("IntersectionObserver" in window)new IntersectionObserver(function(es,o){if(es[0].isIntersecting){go();o.disconnect()}},{threshold:.6}).observe(svg);})();
+
+// scroll reveal, added only after the script runs so content stays visible without JS
+(function(){var rv=document.querySelectorAll(".rv");if(reduce||!("IntersectionObserver" in window)){rv.forEach(function(e){e.classList.add("in")});return}
+ var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.08});rv.forEach(function(e){io.observe(e)})})();
+
+// copy buttons
+document.querySelectorAll("[data-copy]").forEach(function(b){var o=b.textContent;b.addEventListener("click",function(){var src=document.getElementById(b.dataset.copy),t=src.textContent;
+ function ok(){b.textContent="Copied";b.classList.add("done");document.getElementById("live").textContent="Copied to the clipboard";setTimeout(function(){b.textContent=o;b.classList.remove("done")},1500)}
+ function sel(){var r=document.createRange();r.selectNodeContents(src);var s=getSelection();s.removeAllRanges();s.addRange(r);document.getElementById("live").textContent="Selected, press Ctrl+C to copy"}
+ if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,sel);else sel()})});
+
+// theme toggle starts from the system setting and remembers an explicit choice
+(function(){var b=document.getElementById("theme"),d=document.documentElement;
+ function cur(){return d.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
+ function paint(){var dk=cur()=="dark";b.setAttribute("aria-pressed",dk);b.textContent=dk?"Light":"Dark";b.setAttribute("aria-label",dk?"Light theme":"Dark theme")}
+ b.onclick=function(){d.dataset.theme=cur()=="dark"?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}paint()};paint()})();
+</script>
+</body>
+</html>
