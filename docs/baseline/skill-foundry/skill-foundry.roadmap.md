@@ -11,7 +11,7 @@ code_ref: "unknown"
 
 | Phase | Outcome | Depends on | Status |
 |---|---|---|---|
-| SF-P1 | foundry skeleton and copier config | - | planned |
+| SF-P1 | foundry skeleton and copier config | - | complete |
 | SF-P2 | `template/` harness, scripts, example skill | SF-P1 | planned |
 | SF-P3 | optional kit | SF-P2 | planned |
 | SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | planned |
@@ -26,6 +26,8 @@ Acceptance criteria:
 - `copier.yml` with the five questions of `introduction` `Target`, validators on `repo_name` and `skill_prefix`, `_subdirectory: template`, `_min_copier_version` 9, no `_tasks`
 
 Verification gate: `uvx --from "copier>=9,<10" copier copy --defaults --data repo_name=probe <scratch>` renders without prompting.
+
+Evidence: the gate command rendered `.copier-answers.yml` with every default and no prompt; `repo_name=Bad_Name` stopped on the validator. Files: `copier.yml`, `template/{{_copier_conf.answers_file}}.jinja`, root `README.md`, `AGENTS.md`, `LICENSE`, `ruff.toml`, `.gitattributes`, `.gitignore`, `.editorconfig`.
 
 ## SF-P2: `template/` harness, scripts, example skill
 
