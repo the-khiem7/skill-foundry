@@ -3,3 +3,5 @@ target-version = "py311"
 
 [lint]
 select = ["E", "F", "W", "I", "B", "UP"]
+# Prose in docstrings and strings is never hard-wrapped; the formatter keeps code within the line length.
+ignore = ["E501"]
