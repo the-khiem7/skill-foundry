@@ -13,7 +13,7 @@ code_ref: "unknown"
 |---|---|---|---|
 | SF-P1 | foundry skeleton and copier config | - | complete |
 | SF-P2 | `template/` harness, scripts, example skill | SF-P1 | complete |
-| SF-P3 | optional kit | SF-P2 | planned |
+| SF-P3 | optional kit | SF-P2 | complete |
 | SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | planned |
 | SF-P5 | end-to-end verification and initial commit | SF-P4 | planned |
 | SF-P6 | ROI of making `Baselinedocs-Skills` and `commit-composer` copier-compatible | SF-P5 | planned |
@@ -52,6 +52,8 @@ Acceptance criteria:
 - `with_kit` off leaves no trace of the kit
 
 Verification gate: render with `with_kit` on and off; each suite passes.
+
+Evidence: `with_kit=true`: 30 passed, ruff clean, `new_skill.py demo` copies the kit, then 37 passed. `with_kit=false`: no kit file, no kit test, no kit mention in `AGENTS.md`, 21 passed, then 27 passed.
 
 ## SF-P4: `AGENT-GUIDE.md`, foundry tests, release script
 
