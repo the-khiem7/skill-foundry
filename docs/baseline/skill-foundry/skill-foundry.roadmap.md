@@ -15,7 +15,7 @@ code_ref: "uncommitted"
 | SF-P2 | `template/` harness, scripts, example skill | SF-P1 | complete |
 | SF-P3 | optional kit | SF-P2 | complete |
 | SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | complete |
-| SF-P5 | end-to-end verification | SF-P4 | planned |
+| SF-P5 | end-to-end verification | SF-P4 | complete |
 | SF-P6 | ROI of making `Baselinedocs-Skills` and `commit-composer` copier-compatible | SF-P5 | planned |
 
 ## SF-P1: foundry skeleton and copier config
@@ -78,6 +78,8 @@ Acceptance criteria:
 Revision summary: the single initial commit was dropped; the user authorized one commit set per phase from SF-P1 on.
 
 Verification gate: `git status` clean after the phase commit.
+
+Evidence: the guide command with every `--data` key (`repo_name=demo-skills`, `skill_prefix=demo`, kit on, MIT) and the local repository path in place of `gh:` rendered from commit `481f987` (no tag, so copier used HEAD) without prompting; the generated repository then ran 30 passed, `ruff check` clean, `ruff format --check` 12 files formatted. Not covered: `gh:` resolution, the tag-pinned raw link, and `copier update`, all of which need a pushed tag.
 
 ## SF-P6: ROI of making `Baselinedocs-Skills` and `commit-composer` copier-compatible
 
