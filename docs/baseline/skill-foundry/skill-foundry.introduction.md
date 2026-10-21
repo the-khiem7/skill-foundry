@@ -4,7 +4,7 @@ pack: "skill-foundry"
 document: "introduction"
 status: "active"
 updated: "2026-10-21"
-code_ref: "unknown"
+code_ref: "uncommitted"
 ---
 
 # Skill Foundry
@@ -19,9 +19,9 @@ Out of scope: adding a skill to an existing repository (the generated repository
 
 | Area | State |
 |---|---|
-| Repository | `C:\.repos\Personal\skill-foundry` holds only this pack, not a git repository yet |
-| Template, scripts, tests, guide | planned, nothing built |
-| Copier | chosen (SF-D1), not yet run against this template |
+| Repository | `C:\.repos\Personal\skill-foundry`, git on `main`, one commit set per phase, no remote, no tag |
+| Template, scripts, tests, guide | built; foundry suite and both rendered variants pass locally; no CI run yet |
+| Copier | 9.x renders the template from the working tree without prompts (SF-D1) |
 
 ## Target
 

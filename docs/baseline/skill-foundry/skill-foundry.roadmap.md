@@ -4,7 +4,7 @@ pack: "skill-foundry"
 document: "roadmap"
 status: "active"
 updated: "2026-10-21"
-code_ref: "unknown"
+code_ref: "uncommitted"
 ---
 
 # Skill Foundry: Roadmap
@@ -14,8 +14,8 @@ code_ref: "unknown"
 | SF-P1 | foundry skeleton and copier config | - | complete |
 | SF-P2 | `template/` harness, scripts, example skill | SF-P1 | complete |
 | SF-P3 | optional kit | SF-P2 | complete |
-| SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | planned |
-| SF-P5 | end-to-end verification and initial commit | SF-P4 | planned |
+| SF-P4 | `AGENT-GUIDE.md`, foundry tests, release script | SF-P3 | complete |
+| SF-P5 | end-to-end verification | SF-P4 | planned |
 | SF-P6 | ROI of making `Baselinedocs-Skills` and `commit-composer` copier-compatible | SF-P5 | planned |
 
 ## SF-P1: foundry skeleton and copier config
@@ -66,14 +66,18 @@ Acceptance criteria:
 
 Verification gate: `uvx --from "pytest>=8,<10" --with pyyaml --with "copier>=9,<10" pytest tests/ -q` and ruff pass on the foundry.
 
-## SF-P5: end-to-end verification and initial commit
+Evidence: the gate command: 22 passed; `ruff check` and `ruff format --check` clean on 16 files. Deleting the `with_kit` line from the guide command fails `test_command_passes_every_question_and_nothing_else`. `release.py` was tested on its link rewrite and argument handling only, not run end to end.
+
+## SF-P5: end-to-end verification
 
 Acceptance criteria:
 
 - the guide's command, run verbatim with the local path in place of `gh:`, produces a repository whose suite passes
-- one initial commit on `main`; no push, no tag, no GitHub repository
+- no push, no tag, no GitHub repository
 
-Verification gate: `git status` clean and `git log` shows one commit.
+Revision summary: the single initial commit was dropped; the user authorized one commit set per phase from SF-P1 on.
+
+Verification gate: `git status` clean after the phase commit.
 
 ## SF-P6: ROI of making `Baselinedocs-Skills` and `commit-composer` copier-compatible
 

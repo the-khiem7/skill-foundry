@@ -4,7 +4,7 @@ pack: "skill-foundry"
 document: "hallucination"
 status: "active"
 updated: "2026-10-21"
-code_ref: "unknown"
+code_ref: "uncommitted"
 ---
 
 # Skill Foundry: Decisions and Open Questions
