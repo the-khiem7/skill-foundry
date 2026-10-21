@@ -1,0 +1,18 @@
+import pytest
+from helpers import PREFIX, ROOT, SKILL_NAMES
+
+CANONICAL = ROOT / "contract" / "kit.sh"
+SHIPPING = [name for name in SKILL_NAMES if (ROOT / name / "scripts" / "kit.sh").exists()]
+
+
+def test_the_example_ships_the_kit():
+    assert f"{PREFIX}-example" in SHIPPING or f"{PREFIX}-example" not in SKILL_NAMES
+
+
+@pytest.mark.parametrize("name", SHIPPING)
+def test_packaged_kit_is_byte_identical(name):
+    # An installed skill cannot reach contract/, so it runs its own copy; a copy
+    # edited in place drifts from every other skill without any test noticing.
+    assert (ROOT / name / "scripts" / "kit.sh").read_bytes() == CANONICAL.read_bytes(), (
+        f"copy contract/kit.sh to {name}/scripts/kit.sh"
+    )

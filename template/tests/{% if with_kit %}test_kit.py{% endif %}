@@ -1,0 +1,52 @@
+import re
+import shutil
+import subprocess
+
+import pytest
+from helpers import ROOT, read_text
+
+KIT = ROOT / "contract" / "kit.sh"
+SH = shutil.which("sh")
+needs_sh = pytest.mark.skipif(SH is None, reason="no sh on PATH")
+
+
+def run(*args, cwd=ROOT):
+    return subprocess.run([SH, str(KIT), *args], cwd=cwd, capture_output=True, text=True)
+
+
+@needs_sh
+def test_hello_prints_hello():
+    result = run("hello")
+    assert (result.returncode, result.stdout) == (0, "hello\n")
+
+
+@needs_sh
+@pytest.mark.parametrize("args", [(), ("unknown",)])
+def test_missing_or_unknown_command_prints_usage_and_exits_2(args):
+    result = run(*args)
+    assert result.returncode == 2
+    assert "usage:" in result.stderr
+
+
+@needs_sh
+def test_kit_writes_nothing(tmp_path):
+    run("hello", cwd=tmp_path)
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_kit_redirects_only_to_stderr_or_dev_null():
+    code = [line.split("#")[0] for line in read_text(KIT).splitlines()]
+    redirects = re.findall(r">>?\s*(\S+)", "\n".join(code))
+    assert set(redirects) <= {"&2", "/dev/null"}, redirects
+
+
+def test_kit_calls_no_network_tool():
+    words = set(re.findall(r"[a-z]+", read_text(KIT)))
+    assert not words & {"curl", "wget", "nc", "ssh", "scp", "ftp", "telnet"}
+
+
+def test_kit_uses_no_bash_only_syntax():
+    text = read_text(KIT)
+    assert text.startswith("#!/bin/sh\n")
+    for token in ("[[", "function ", "local ", "$'", "<(", "declare "):
+        assert token not in text, token
