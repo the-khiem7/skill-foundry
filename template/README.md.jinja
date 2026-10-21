@@ -1,0 +1,32 @@
+# {{ repo_name }}
+
+Agent skills, each installable on its own.
+
+## Install a skill
+
+```bash
+npx skills add {{ github_owner }}/{{ repo_name }} --skill <name>
+```
+
+## Skills
+
+| Skill | What it does |
+|---|---|
+| `{{ skill_prefix }}-example` | placeholder generated with the repository; replace or delete it |
+
+## Develop
+
+```bash
+uvx --from "pytest>=8,<10" --with pyyaml pytest tests/ -q
+uvx --from "ruff>=0.6,<1" ruff check
+uvx --from "ruff>=0.6,<1" ruff format --check
+uv run scripts/new_skill.py <name>
+```
+
+Rules for working here are in `AGENTS.md`.
+{%- if license != 'none' %}
+
+## License
+
+{{ license }}. See `LICENSE`.
+{%- endif %}

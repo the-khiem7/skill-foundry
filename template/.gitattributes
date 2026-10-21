@@ -1,0 +1,3 @@
+# Packaged copies are compared byte for byte with their canonical file, and sh
+# cannot run a script with CRLF endings, so every text file is LF.
+* text=auto eol=lf

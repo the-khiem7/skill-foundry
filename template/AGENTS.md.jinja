@@ -1,0 +1,43 @@
+# Working in this repository
+
+This repository is the source of the `{{ skill_prefix }}-*` skills. Each one is installed on its own with `npx skills add {{ github_owner }}/{{ repo_name }} --skill <name>`, and only its folder travels.
+
+## What ships and what does not
+
+| Path | Ships |
+|---|---|
+| `<skill>/SKILL.md`, `<skill>/agents/openai.yaml`, `<skill>/references/*`, `<skill>/scripts/*` | yes |
+| `AGENTS.md`, `README.md`, `tests/`, `scripts/`, `.github/`{% if with_kit %}, `contract/`{% endif %} | no |
+
+- A skill may rely on anything inside its own folder.
+- Name a sibling skill for routing, never make its content a prerequisite: a skill installed alone cannot reach another skill's folder. `tests/test_conventions.py` fails on a `../` path or a sibling folder path in a `SKILL.md`.
+- A `SKILL.md` loads in full on every run. Keep a WHY clause only where the agent would otherwise argue its way past the rule.
+
+## Adding a skill
+
+`uv run scripts/new_skill.py <name>` copies `{{ skill_prefix }}-example` to `{{ skill_prefix }}-<name>` at the repository's current version. A skill folder holds `SKILL.md`, `agents/openai.yaml`, and `references/` or `scripts/` only when needed. A user entrypoint sets `allow_implicit_invocation: false`.
+{%- if with_kit %}
+
+## The kit
+
+`contract/kit.sh` is the canonical copy of the shell kit. Each skill that runs it ships a byte-identical copy at `<skill>/scripts/kit.sh`, because an installed skill cannot reach `contract/`. Edit the canonical file, then copy it to every skill that ships it; `tests/test_packaged_copies.py` fails on drift. The kit is POSIX sh and POSIX awk only, never writes, and never touches the network, because an installed skill runs it inside other people's repositories. `tests/test_kit.py` holds one case per rule.
+{%- endif %}
+
+## Conventions
+
+- ASCII hyphen only, no en dash or em dash; `tests/test_conventions.py` enforces it.
+- Never hard-wrap a paragraph; the suite warns on one.
+- Commits follow Conventional Commits with the skill name as scope, for example `fix({{ skill_prefix }}-example): ...`. Use the repository name as scope for a change outside any skill.
+- Python in `tests/` and `scripts/` passes `ruff check` and `ruff format --check`.
+
+## Releases
+
+Every `SKILL.md` carries one top-level `version:`, shared by every skill. Never edit it by hand: commit the work to `main`, then run `uv run scripts/release.py vMAJOR.MINOR.PATCH`. It stamps every `SKILL.md`, runs the suite, commits `release: vX.Y.Z`, and tags that commit. It never pushes. `.github/workflows/release.yml` only verifies that every `SKILL.md` carries the tag's version.
+
+## Tests
+
+```bash
+uvx --from "pytest>=8,<10" --with pyyaml pytest tests/ -q
+```
+
+pytest is pinned because bare `uvx pytest` takes whatever is newest. The repository has no `pyproject.toml`; `pytest.ini` holds the config.
